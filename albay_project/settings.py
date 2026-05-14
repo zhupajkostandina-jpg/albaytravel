@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-bb!&e5h3x808u@chtm=01v_^(i#l*0j218zq$8#gion62t&543
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['albaytravel.onrender.com', 'albaytravel.com', 'www.albaytravel.com']
 
 # Application definition
 
