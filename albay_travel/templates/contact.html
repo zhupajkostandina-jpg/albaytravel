@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contact | ALBAY TRAVEL{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="page-hero__bg" style="background-image:url('{% static 'images/boattripkavaje2.png' %}')"></div>
+  <div class="page-hero__overlay"></div>
+  <div class="container">
+    <div class="page-hero__content">
+      <nav class="page-hero__breadcrumb" aria-label="Breadcrumb">
+        <a href="{% url 'home' %}">Home</a>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        <span>Contact</span>
+      </nav>
+      <h1 class="page-hero__title">Get in Touch</h1>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--clr-dark);">
+  <div class="container">
+    <div style="max-width:640px; margin-bottom:48px;">
+      <p class="section-label">Contact</p>
+      <h2 class="section-title">Let's Plan Your <em>Trip</em></h2>
+    </div>
+
+    <div class="contact-layout">
+      <div>
+        <div class="contact-panel">
+          <div class="contact-info__item">
+            <div class="contact-info__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="contact-info__label">Location</div>
+              <div class="contact-info__value">Golem, Albania</div>
+            </div>
+          </div>
+          <div class="contact-info__item">
+            <div class="contact-info__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="contact-info__label">Phone / WhatsApp</div>
+              <div class="contact-info__value">
+                <a href="https://wa.me/355686033460">+355 68 603 3460</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact-info__item" style="margin-bottom:0;">
+            <div class="contact-info__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="contact-info__label">Email</div>
+              <div class="contact-info__value">info.albaytravel@gmail.com</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-quick-actions">
+          <a href="https://wa.me/355686033460" class="contact-quick-actions__item">
+            <strong>WhatsApp</strong>
+            <span>Open chat directly</span>
+          </a>
+          <a href="mailto:info.albaytravel@gmail.com"> class="contact-quick-actions__item">
+            <strong>Email</strong>
+            <span>Send from your mail app</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="container">
+    <div class="cta-banner__content reveal">
+      <p class="section-label" style="justify-content:center;">Can't Decide?</p>
+      <h2 class="cta-banner__title">We'll Build Your <em>Custom Itinerary</em></h2>
+      <p class="section-subtitle" style="margin:0 auto;text-align:center;">
+        Tell us your dream trip and we'll craft a bespoke experience just for you.
+      </p>
+      <div class="cta-banner__actions">
+        <a href="{% url 'contact' %}" class="btn btn--primary">Request Custom Tour</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

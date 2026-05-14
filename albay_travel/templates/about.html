@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}About Us | ALBAY TRAVEL{% endblock %}
+
+{% block content %}
+
+<section class="page-hero" aria-label="About page hero">
+  <div class="page-hero__bg" style="background-image:url('{% static 'images/backgorundipese.png.png' %}')"></div>
+  <div class="page-hero__overlay"></div>
+  <div class="container">
+    <div class="page-hero__content">
+      <nav class="page-hero__breadcrumb" aria-label="Breadcrumb">
+        <a href="{% url 'home' %}">Home</a>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        <span>About Us</span>
+      </nav>
+      <h1 class="page-hero__title">About <em>Us</em></h1>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--clr-dark);">
+  <div class="container">
+    <div class="about-snippet__grid">
+      <div class="reveal">
+        <p class="section-label">Who We Are</p>
+        <h2 class="section-title">Discover <em>Albania With Us</em></h2>
+        <p style="margin-bottom:1.25rem;">
+          Welcome to ALBAY TOURS — your trusted travel partner for unforgettable experiences across Albania.
+          We are passionate about creating unique journeys that combine adventure, culture, relaxation, and authentic local experiences.
+        </p>
+        <p style="margin-bottom:1.25rem;">
+          From breathtaking beaches and hidden gems to historical landmarks and off-road adventures, our goal is to help every traveler discover the true beauty of Albania.
+        </p>
+        <p style="margin-bottom:1.25rem;">
+          At ALBAY TOURS, we believe that every trip should be more than just a destination — it should be a memory that lasts forever.
+          Our team is dedicated to providing comfortable transportation, professional service, and carefully planned tours for both locals and international visitors.
+        </p>
+        <p>
+          Whether you are looking for daily tours, beach escapes, boat trips, or customized travel experiences, we are here to make your journey easy, exciting, and unforgettable.
+        </p>
+      </div>
+      <div class="about-snippet__media reveal reveal-delay-1">
+        <img
+          class="about-snippet__img-main"
+          src="{% static 'images/kullasahatit.png' %}"
+          alt="Albanian mountains and valleys"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="container">
+    <div class="cta-banner__content reveal">
+      <p class="section-label" style="justify-content:center;">Can't Decide?</p>
+      <h2 class="cta-banner__title">We'll Build Your <em>Custom Itinerary</em></h2>
+      <p class="section-subtitle" style="margin:0 auto; text-align:center;">Tell us your dream trip and we'll craft a bespoke experience just for you.</p>
+      <div class="cta-banner__actions">
+        <a href="contact.html" class="btn btn--primary">Request Custom Tour</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

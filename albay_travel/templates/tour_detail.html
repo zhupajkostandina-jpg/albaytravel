@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ tour.title }} | ALBAY TRAVEL{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="page-hero__bg" style="background-image:url('{{ tour.main_image.url }}')"></div>
+  <div class="page-hero__overlay"></div>
+  <div class="container">
+    <div class="page-hero__content">
+      <nav class="page-hero__breadcrumb" aria-label="Breadcrumb">
+        <a href="{% url 'home' %}">Home</a>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        <a href="{% url 'tours_list' %}">Tours</a>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        <span>{{ tour.title }}</span>
+      </nav>
+      <h1 class="page-hero__title">{{ tour.title }}</h1>
+    </div>
+  </div>
+</section>
+
+<section class="tour-detail">
+  <div class="container">
+    <div class="tour-detail__layout">
+      <div>
+
+        <!-- Gallery -->
+        <div class="tour-gallery" data-visible-thumbs="4">
+          <div class="tour-gallery__main">
+            <button class="tour-gallery__nav tour-gallery__nav--prev" type="button" aria-label="Previous image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <img src="{{ tour.main_image.url }}" alt="{{ tour.title }}" />
+            <button class="tour-gallery__nav tour-gallery__nav--next" type="button" aria-label="Next image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+          <div class="tour-gallery__thumbs-wrap">
+            <button class="tour-gallery__thumb-nav tour-gallery__thumb-nav--prev" type="button" aria-label="Previous thumbnails">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <div class="tour-gallery__thumbs">
+              <button class="tour-gallery__thumb active" type="button">
+                <img src="{{ tour.main_image.url }}" alt="{{ tour.title }}" />
+              </button>
+              {% for img in gallery %}
+              <button class="tour-gallery__thumb" type="button">
+                <img src="{{ img.image.url }}" alt="{{ img.alt_text|default:tour.title }}" />
+              </button>
+              {% endfor %}
+            </div>
+            <button class="tour-gallery__thumb-nav tour-gallery__thumb-nav--next" type="button" aria-label="Next thumbnails">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Details -->
+        <h2 class="tour-detail__title">{{ tour.title }}</h2>
+        <div class="tour-detail__meta">
+          <div class="tour-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <strong>Duration:</strong> {{ tour.duration }}
+          </div>
+          <div class="tour-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <strong>Group Size:</strong> {{ tour.group_size }}
+          </div>
+          <div class="tour-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <strong>Location:</strong> {{ tour.location }}
+          </div>
+        </div>
+
+        <div class="tour-description-box">
+          <p>{{ tour.description }}</p>
+        </div>
+
+        <br>
+        <div class="tour-info-cards">
+          {% if tour.highlight_1_title %}
+          <div class="tour-info-card">
+            <h4>{{ tour.highlight_1_title }}</h4>
+            <p>{{ tour.highlight_1_text }}</p>
+          </div><br>
+          {% endif %}
+          {% if tour.highlight_2_title %}
+          <div class="tour-info-card">
+            <h4>{{ tour.highlight_2_title }}</h4>
+            <p>{{ tour.highlight_2_text }}</p>
+          </div><br>
+          {% endif %}
+          {% if tour.highlight_3_title %}
+          <div class="tour-info-card">
+            <h4>{{ tour.highlight_3_title }}</h4>
+            <p>{{ tour.highlight_3_text }}</p>
+          </div>
+          {% endif %}
+        </div>
+
+      </div>
+
+      <!-- Booking Sidebar -->
+      <aside class="booking-card">
+        <div class="booking-card__price">
+          <div class="booking-card__price-num">€{{ tour.price }}</div>
+          {% if tour.price_label %}
+          <div class="booking-card__price-per">{{ tour.price_label }}</div>
+          {% endif %}
+        </div>
+
+        <form class="booking-form" id="booking-form" data-tour="{{ tour.title }}" data-whatsapp="{{ tour.whatsapp_number }}">
+          <div class="booking-form__group">
+            <label class="booking-form__label" for="tour-date">Preferred Date</label>
+            <input class="booking-form__input" id="tour-date" name="date" type="date" required />
+          </div>
+          <div class="booking-form__group">
+            <label class="booking-form__label" for="tour-guests">Guests</label>
+            <select class="booking-form__input" id="tour-guests" name="guests">
+              {% for n in tour.get_guest_range %}
+              <option value="{{ n }}">{{ n }} Guest{% if n > 1 %}s{% endif %}</option>
+              {% endfor %}
+            </select>
+          </div>
+          {% if tour.slug == '4x4-offroad-mountain-experience' %}
+          <div class="booking-form__group" id="bbq-option">
+            <label class="booking-form__label" style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+              <input type="checkbox" id="bbq-checkbox" />
+              Add BBQ (+€20/person | +15/person for +2 Guests)
+            </label>
+            <div id="bbq-price-note" style="color:var(--clr-accent); font-size:0.85rem; margin-top:6px; display:none;"></div>
+          </div>
+          {% endif %}
+          <button type="submit" class="btn btn--primary" style="width:100%; justify-content:center; margin-top:8px;">
+            <span>Request Booking via WhatsApp</span>
+          </button>
+        </form>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+{% if related_tours %}
+<section class="section section--sm" style="background:var(--clr-dark2);">
+  <div class="container">
+    <p class="section-label">More Tours</p>
+    <h2 class="section-title">You May Also <em>Like</em></h2>
+    <div class="tours-grid">
+      {% for related in related_tours %}
+      <article class="tour-card reveal" data-category="{{ related.category }}">
+        <a href="{{ related.get_absolute_url }}" class="tour-card-link">
+          <div class="tour-card__img-wrap">
+            <img class="tour-card__img" src="{{ related.main_image.url }}" alt="{{ related.title }}" loading="lazy" />
+            {% if related.badge %}<span class="tour-card__badge">{{ related.badge }}</span>{% endif %}
+            <div class="tour-card__overlay"></div>
+            <div class="tour-card__price">€{{ related.price }} {% if related.price_label %}<span>{{ related.price_label }}</span>{% endif %}</div>
+          </div>
+          <div class="tour-card__body">
+            <div class="tour-card__meta">
+              <span class="tour-card__meta-item">{{ related.duration }}</span>
+              <span class="tour-card__meta-item">{{ related.group_size }}</span>
+              <span class="tour-card__meta-item">{{ related.location }}</span>
+            </div>
+            <h3 class="tour-card__title">{{ related.title }}</h3>
+            <p class="tour-card__desc">{{ related.short_description }}</p>
+            <div class="tour-card__footer">
+              <span class="btn btn--outline btn--icon">View Tour</span>
+            </div>
+          </div>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="cta-banner">
+  <div class="container">
+    <div class="cta-banner__content reveal">
+      <p class="section-label" style="justify-content:center;">Can't Decide?</p>
+      <h2 class="cta-banner__title">We'll Build Your <em>Custom Itinerary</em></h2>
+      <p class="section-subtitle" style="margin:0 auto;text-align:center;">
+        Tell us your dream trip and we'll craft a bespoke experience just for you.
+      </p>
+      <div class="cta-banner__actions">
+        <a href="contact.html" class="btn btn--primary">Request Custom Tour</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const bbqCheckbox = document.getElementById('bbq-checkbox');
+  const guestsSelect = document.getElementById('tour-guests');
+  const bbqNote = document.getElementById('bbq-price-note');
+
+  if (bbqCheckbox) {
+    const updateBbqPrice = () => {
+      const guests = parseInt(guestsSelect?.value || 2);
+      if (bbqCheckbox.checked) {
+        const extra = guests >= 3 ? 15 * guests : 20 * guests;
+        bbqNote.textContent = `BBQ extra: €${extra} total`;
+        bbqNote.style.display = 'block';
+      } else {
+        bbqNote.style.display = 'none';
+      }
+    };
+    bbqCheckbox.addEventListener('change', updateBbqPrice);
+    guestsSelect?.addEventListener('change', updateBbqPrice);
+  }
+
+  const bookingForm = document.getElementById('booking-form');
+  if (bookingForm && bbqCheckbox) {
+    bookingForm.addEventListener('submit', (e) => {
+      e.stopImmediatePropagation();
+      e.preventDefault();
+      const dateInput = bookingForm.querySelector('input[type="date"]');
+      const guests = guestsSelect?.value || '2';
+      const tourName = bookingForm.dataset.tour || '';
+      const whatsapp = bookingForm.dataset.whatsapp || '355686033460';
+      const selectedDate = dateInput?.value || '';
+      if (!selectedDate) { dateInput?.focus(); return; }
+      const formattedDate = new Date(`${selectedDate}T00:00:00`).toLocaleDateString('en-GB', {
+        day: '2-digit', month: 'long', year: 'numeric'
+      });
+      const bbqText = bbqCheckbox.checked
+        ? `\nBBQ option: Yes (+€${parseInt(guests) >= 3 ? parseInt(guests) * 15 : parseInt(guests) * 20} extra)`
+        : '\nBBQ option: No';
+      const message = [
+        'New booking request from ALBAY TRAVEL website',
+        '',
+        `Tour: ${tourName}`,
+        `Preferred date: ${formattedDate}`,
+        `Guests: ${guests}`,
+        bbqText
+      ].join('\n');
+      window.location.href = `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
+    }, true);
+  }
+</script>
+{% endblock %}

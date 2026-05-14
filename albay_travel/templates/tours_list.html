@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}All Tours | ALBAY TRAVEL{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="page-hero__bg" style="background-image:url('{% static 'images/backgrounditrete.png.png' %}')"></div>
+  <div class="page-hero__overlay"></div>
+  <div class="container">
+    <div class="page-hero__content">
+      <nav class="page-hero__breadcrumb" aria-label="Breadcrumb">
+        <a href="{% url 'home' %}">Home</a>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        <span>All Tours</span>
+      </nav>
+      <h1 class="page-hero__title">Our <em>Tours &amp; Experiences</em></h1>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--clr-dark);">
+  <div class="container">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:16px; flex-wrap:wrap; gap:16px;">
+      <div>
+        <p class="section-label">Discover Albania</p>
+        <h2 class="section-title" style="margin-bottom:0;">Find Your <em>Perfect Tour</em></h2>
+      </div>
+    </div>
+
+    <div class="tours-filter" role="group" aria-label="Filter tours by category">
+      <a href="{% url 'tours_list' %}" class="filter-btn {% if active_filter == 'all' %}active{% endif %}">All Tours</a>
+      <a href="{% url 'tours_list' %}?filter=private" class="filter-btn {% if active_filter == 'private' %}active{% endif %}">Private Tours</a>
+      <a href="{% url 'tours_list' %}?filter=offroad" class="filter-btn {% if active_filter == 'offroad' %}active{% endif %}">4x4 Offroad Expeditions</a>
+      <a href="{% url 'tours_list' %}?filter=boat" class="filter-btn {% if active_filter == 'boat' %}active{% endif %}">Boat Trips</a>
+    </div>
+
+    <div class="tours-page-grid">
+      {% for tour in tours %}
+      <article class="tour-card reveal" data-category="{{ tour.category }}">
+        <a href="{{ tour.get_absolute_url }}" class="tour-card-link">
+          <div class="tour-card__img-wrap">
+            <img class="tour-card__img" src="{{ tour.main_image.url }}" alt="{{ tour.title }}" loading="lazy" />
+            {% if tour.badge %}<span class="tour-card__badge">{{ tour.badge }}</span>{% endif %}
+            <div class="tour-card__overlay"></div>
+            <div class="tour-card__price">
+              €{{ tour.price }}
+              {% if tour.price_label %}<span>{{ tour.price_label }}</span>{% endif %}
+            </div>
+          </div>
+          <div class="tour-card__body">
+            <div class="tour-card__meta">
+              <span class="tour-card__meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                {{ tour.duration }}
+              </span>
+              <span class="tour-card__meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                {{ tour.group_size }}
+              </span>
+              <span class="tour-card__meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                {{ tour.location }}
+              </span>
+            </div>
+            <h3 class="tour-card__title">{{ tour.title }}</h3>
+            <p class="tour-card__desc">{{ tour.short_description }}</p>
+            <div class="tour-card__footer">
+              <span class="btn btn--outline btn--icon">
+                Details
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </article>
+      {% empty %}
+      <p style="color:var(--clr-light); opacity:0.6; padding:40px 0;">No tours found in this category.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="container">
+    <div class="cta-banner__content reveal">
+      <p class="section-label" style="justify-content:center;">Can't Decide?</p>
+      <h2 class="cta-banner__title">We'll Build Your <em>Custom Itinerary</em></h2>
+      <p class="section-subtitle" style="margin:0 auto;text-align:center;">
+        Tell us your dream trip and we'll craft a bespoke experience just for you.
+      </p>
+      <div class="cta-banner__actions">
+        <a href="contact.html" class="btn btn--primary">Request Custom Tour</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}ALBAY TRAVEL | Explore Albania{% endblock %}
+
+{% block content %}
+
+<section class="hero" aria-label="Hero">
+  <div class="hero__bg" role="img" aria-label="Albanian mountain landscape"></div>
+  <div class="hero__noise"></div>
+  <div class="container">
+    <div class="hero__content">
+      <p class="hero__label">DISCOVER ALBANIA</p>
+      <h1 class="hero__title">
+        Explore Albania<br>with <em>ALBAY TRAVEL</em>
+      </h1>
+      <p class="hero__text">
+        From the sunlit shores of Golem to Albania's hidden gems we create seamless private journeys that take you beyond the ordinary, revealing untouched beaches, historic towns, and breathtaking landscapes crafted for unforgettable travel experiences.
+      </p>
+      <div class="hero__actions">
+        <a href="{% url 'tours_list' %}" class="btn btn--primary">
+          <span>Explore Tours</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="{% url 'tours_list' %}?filter=private" class="btn btn--outline">Book a Private Tour</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section featured" aria-labelledby="featured-heading">
+  <div class="container">
+    <div class="featured__header">
+      <div>
+        <p class="section-label">Handpicked Experiences</p>
+        <h2 class="section-title" id="featured-heading">FEATURED <em>TOURS</em></h2>
+        <p class="section-subtitle">Every journey is carefully crafted to immerse you in authentic Albanian culture taking you deeper than the usual paths.</p>
+      </div>
+      <a href="{% url 'tours_list' %}" class="btn btn--outline reveal">
+        <span>View All Tours</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="tours-grid">
+      {% for tour in featured_tours %}
+      <article class="tour-card reveal" data-category="{{ tour.category }}">
+        <a href="{{ tour.get_absolute_url }}" class="tour-card-link">
+          <div class="tour-card__img-wrap">
+            <img class="tour-card__img" src="{{ tour.main_image.url }}" alt="{{ tour.title }}" loading="lazy" />
+            {% if tour.badge %}<span class="tour-card__badge">{{ tour.badge }}</span>{% endif %}
+            <div class="tour-card__overlay"></div>
+            <div class="tour-card__price">
+              €{{ tour.price }}
+              {% if tour.price_label %}<span>{{ tour.price_label }}</span>{% endif %}
+            </div>
+          </div>
+          <div class="tour-card__body">
+            <div class="tour-card__meta">
+              <span class="tour-card__meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                {{ tour.duration }}
+              </span>
+              <span class="tour-card__meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                {{ tour.group_size }}
+              </span>
+              <span class="tour-card__meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                {{ tour.location }}
+              </span>
+            </div>
+            <h3 class="tour-card__title">{{ tour.title }}</h3>
+            <p class="tour-card__desc">{{ tour.short_description }}</p>
+            <div class="tour-card__footer">
+              <a href="{{ tour.get_absolute_url }}" class="btn btn--outline btn--icon">
+                Details
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </a>
+      </article>
+      {% empty %}
+      <p style="color:var(--clr-light); opacity:0.6;">No tours yet. Add some from the admin panel!</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner" aria-label="Call to action">
+  <div class="container">
+    <div class="cta-banner__content reveal">
+      <p class="section-label" style="justify-content:center;">Can't Decide?</p>
+      <h2 class="cta-banner__title">We'll Build Your <em>Custom Itinerary</em></h2>
+      <p class="section-subtitle" style="margin:0 auto; text-align:center;">
+        Tell us your dream trip and we'll craft a bespoke experience just for you.
+      </p>
+      <div class="cta-banner__actions">
+        <a href="contact.html" class="btn btn--primary">Request Custom Tour</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
