@@ -1865,3 +1865,51 @@ textarea.form-input {
     height: 32px;
   }
 }
+.tour-list{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+.tour-list li{
+    position:relative;
+    padding-left:24px;
+    margin-bottom:14px;
+    line-height:1.8;
+}
+
+.tour-list li::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:11px;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#d4af37;
+}
+
+
+.tour-list li{
+    margin-bottom: 15px;
+    line-height: 1.8;
+}
+
+.tour-info-card{
+    margin-bottom: 30px;
+}
+
+
+.tour-info-card h3{
+    margin-bottom: 25px !important;
+}
+
+.tour-list{
+    margin-top: 20px !important;
+}
+
+
+
+.tour-description-box{
+    margin-bottom: 50px;
+}

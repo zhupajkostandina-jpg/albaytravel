@@ -11,20 +11,101 @@ class TourImageInline(admin.TabularInline):
 
 @admin.register(Tour)
 class TourAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'location', 'is_active', 'is_featured', 'order', 'thumbnail')
-    list_editable = ('is_active', 'is_featured', 'order')
-    list_filter = ('category', 'is_active', 'is_featured')
-    search_fields = ('title', 'location')
-    prepopulated_fields = {'slug': ('title',)}
+    list_display = (
+        'title',
+        'category',
+        'location',
+        'is_active',
+        'is_featured',
+        'order',
+        'thumbnail'
+    )
+
+    list_editable = (
+        'is_active',
+        'is_featured',
+        'order'
+    )
+
+    list_filter = (
+        'category',
+        'is_active',
+        'is_featured'
+    )
+
+    search_fields = (
+        'title',
+        'location'
+    )
+
+    prepopulated_fields = {
+        'slug': ('title',)
+    }
+
+    fieldsets = (
+        ('Basic Information', {
+            'fields': (
+                'title',
+                'slug',
+                'short_description',
+                'description'
+            )
+        }),
+
+        ('Tour Content', {
+            'fields': (
+                'highlights',
+                'itinerary',
+                'included',
+                'important_info'
+            )
+        }),
+
+        ('Tour Details', {
+            'fields': (
+                'category',
+                'badge',
+                'price',
+                'price_label',
+                'duration',
+                'location',
+                'group_size'
+            )
+        }),
+
+        ('Images & Booking', {
+            'fields': (
+                'main_image',
+                'whatsapp_number'
+            )
+        }),
+
+        ('Guests', {
+            'fields': (
+                'min_guests',
+                'max_guests'
+            )
+        }),
+
+        ('Settings', {
+            'fields': (
+                'order',
+                'is_active',
+                'is_featured'
+            )
+        }),
+    )
+
     inlines = [TourImageInline]
 
     def thumbnail(self, obj):
         if obj.main_image:
             return format_html(
-                '<img src="{}" style="height:48px; width:72px; object-fit:cover; border-radius:4px;" />',
+                '<img src="{}" style="height:48px;width:72px;object-fit:cover;border-radius:4px;" />',
                 obj.main_image.url
             )
         return '—'
+
     thumbnail.short_description = 'Image'
 
 

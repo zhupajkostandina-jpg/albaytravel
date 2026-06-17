@@ -76,33 +76,54 @@
         </div>
 
         <div class="tour-description-box">
-          <p>{{ tour.description }}</p>
-        </div>
+  <p>{{ tour.description }}</p>
+</div>
 
-        <br>
-        <div class="tour-info-cards">
-          {% if tour.highlight_1_title %}
-          <div class="tour-info-card">
-            <h4>{{ tour.highlight_1_title }}</h4>
-            <p>{{ tour.highlight_1_text }}</p>
-          </div><br>
-          {% endif %}
-          {% if tour.highlight_2_title %}
-          <div class="tour-info-card">
-            <h4>{{ tour.highlight_2_title }}</h4>
-            <p>{{ tour.highlight_2_text }}</p>
-          </div><br>
-          {% endif %}
-          {% if tour.highlight_3_title %}
-          <div class="tour-info-card">
-            <h4>{{ tour.highlight_3_title }}</h4>
-            <p>{{ tour.highlight_3_text }}</p>
-          </div>
-          {% endif %}
-        </div>
+{% if highlights_list %}
+<div class="tour-info-card">
+    <h3>Highlights</h3>
+    <ul class="tour-list">
+        {% for item in highlights_list %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
 
-      </div>
+{% if itinerary_list %}
+<div class="tour-info-card">
+    <h3>Tour Itinerary</h3>
+    <ul class="tour-list">
+        {% for item in itinerary_list %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
 
+{% if included_list %}
+<div class="tour-info-card">
+    <h3>What's Included</h3>
+    <ul class="tour-list">
+        {% for item in included_list %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+{% if important_info_list %}
+<div class="tour-info-card">
+    <h3>Important Information</h3>
+    <ul class="tour-list">
+        {% for item in important_info_list %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+</div> 
       <!-- Booking Sidebar -->
       <aside class="booking-card">
         <div class="booking-card__price">

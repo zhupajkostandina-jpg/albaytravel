@@ -24,10 +24,16 @@ def tour_detail(request, slug):
     tour = get_object_or_404(Tour, slug=slug, is_active=True)
     gallery = list(tour.gallery_images.all())
     related_tours = Tour.objects.filter(is_active=True).exclude(pk=tour.pk)[:2]
+
     return render(request, 'tour_detail.html', {
         'tour': tour,
         'gallery': gallery,
         'related_tours': related_tours,
+
+        'highlights_list': tour.highlights.splitlines() if tour.highlights else [],
+        'itinerary_list': tour.itinerary.splitlines() if tour.itinerary else [],
+        'included_list': tour.included.splitlines() if tour.included else [],
+        'important_info_list': tour.important_info.splitlines() if tour.important_info else [],
     })
 
 

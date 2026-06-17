@@ -23,7 +23,18 @@ class Tour(models.Model):
     slug = models.SlugField(unique=True)
     short_description = models.CharField(max_length=300)
     description = models.TextField()
-    category = models.CharField(max_length=50, default='private', help_text="Space-separated categories e.g. 'private offroad' or 'private boat'")
+
+    highlights = models.TextField(blank=True)
+    itinerary = models.TextField(blank=True)
+    included = models.TextField(blank=True)
+    important_info = models.TextField(blank=True)
+
+    category = models.CharField(
+        max_length=50,
+        default='private',
+        help_text="Space-separated categories e.g. 'private offroad' or 'private boat'"
+    )
+
     badge = models.CharField(max_length=20, choices=BADGE_CHOICES, blank=True, default='')
     price = models.DecimalField(max_digits=8, decimal_places=2)
     price_label = models.CharField(max_length=50, default='/ person', blank=True)
