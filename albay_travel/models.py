@@ -30,10 +30,10 @@ class Tour(models.Model):
     important_info = models.TextField(blank=True)
 
     category = models.CharField(
-        max_length=50,
-        default='private',
-        help_text="Space-separated categories e.g. 'private offroad' or 'private boat'"
-    )
+    max_length=50,
+    choices=CATEGORY_CHOICES,
+    default='private'
+)
 
     badge = models.CharField(max_length=20, choices=BADGE_CHOICES, blank=True, default='')
     price = models.DecimalField(max_digits=8, decimal_places=2)
