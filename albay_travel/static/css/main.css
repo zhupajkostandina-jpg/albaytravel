@@ -1383,11 +1383,27 @@ body.modal-open {
   cursor: pointer;
   transition: var(--transition);
 }
-.filter-btn:hover,
-.filter-btn.active {
+.filter-btn:hover{
   border-color: var(--clr-gold);
   color: var(--clr-gold);
-  background: rgba(201,168,76,0.08);
+}
+
+.filter-btn{
+  position: relative;
+}
+
+.filter-btn.active{
+  color: var(--clr-gold);
+}
+
+.filter-btn.active::after{
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--clr-gold);
 }
 
 .tours-page-grid {
@@ -1913,3 +1929,4 @@ textarea.form-input {
 .tour-description-box{
     margin-bottom: 50px;
 }
+
